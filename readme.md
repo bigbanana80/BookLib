@@ -11,3 +11,5 @@ BookLib is a web-based library management application built with Django. This ap
 - Search and filter books by title, author, or genre.
 - User-friendly interface for managing library records.
 - Built with Django for rapid development and scalability.
+
+made for `BitPardazan`
