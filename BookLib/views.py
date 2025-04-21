@@ -1,11 +1,30 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
-
+from django.views.generic import TemplateView, ListView, FormView
+from .models import Author, Book
+from .forms import AuthorForm
 # Create your views here.
-class index(TemplateView):
+class index(ListView):
+    model = Author
     template_name = 'BookLib/index.html'
+    context_object_name = 'authors'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'BookLib'
         return context
+    
+class AddAuthor(FormView):
+    form_class = AuthorForm
+    template_name = 'BookLib/add_author.html'
+    success_url = '/'
+    
+    def form_valid(self, form):
+        author = Author(
+            first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name'],
+            age=form.cleaned_data['age'],
+            national_code=form.cleaned_data['national_code'],
+            gender=form.cleaned_data['gender'])
+        author.save()
+        return super().form_valid(form)
+    

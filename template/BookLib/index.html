@@ -9,6 +9,10 @@
     <title>Index</title>
 </head>
 <body>
-    <p>This is a empty page for now</p>
+    <a href={% url "BookLib:add_author" %}>Add author</a>
+    <p>authors</p>
+    {% for author in authors %}
+      <p>{{author.first_name}} {{author.last_name}}</p>
+    {% endfor %}
 </body>
 </html>
