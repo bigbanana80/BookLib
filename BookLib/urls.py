@@ -8,4 +8,5 @@ urlpatterns = [
     path('add_author/', AddAuthor.as_view(), name='add_author'),   
     path('author/<int:pk>/', AuthorDetail.as_view(), name='author_detail'),
     path('delete_author/<int:pk>/', DeleteAuthor.as_view(), name='delete_author'),
+    path('update_author/<int:pk>/', UpdateAuthor.as_view(), name='update_author'),
 ]
