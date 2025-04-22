@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -26,7 +27,7 @@ class index(ListView):
 class AddAuthor(FormView):
     form_class = AuthorForm
     template_name = "BookLib/add_author.html"
-    success_url = "/"
+    success_url = reverse_lazy("BookLib:index")
 
     def form_valid(self, form):
         author = Author(
@@ -54,7 +55,7 @@ class AuthorDetail(DetailView):
 class DeleteAuthor(DeleteView):
     model = Author
     template_name = "BookLib/delete_author.html"
-    success_url = "/"
+    success_url = reverse_lazy("BookLib:index")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
