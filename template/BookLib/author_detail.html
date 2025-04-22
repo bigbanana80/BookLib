@@ -9,7 +9,7 @@
     <h1>Author Details</h1>
 
     <button type="button">
-        <a href="">Add Book</a>
+        <a href={% url "BookLib:add_book" author.pk %}>Add Book</a>
     </button>
     <button type="button">
         <a href={% url "BookLib:update_author" author.pk %}>Update Author</a>

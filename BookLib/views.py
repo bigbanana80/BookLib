@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
 )
 from .models import Author, Book
-from .forms import AuthorForm
+from .forms import AuthorForm, BookForm
 
 
 # Create your views here.
@@ -76,3 +76,22 @@ class UpdateAuthor(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Author"
         return context
+    
+class AddBook(FormView):
+    form_class = BookForm
+    template_name = "BookLib/Book/add_book.html"
+    success_url = reverse_lazy("BookLib:index")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["author"] = Author.objects.get(pk=self.kwargs["pk"]) 
+        return context
+    
+    def form_valid(self, form):
+        book = Book(
+            name=form.cleaned_data["name"],
+            date_published=form.cleaned_data["date_published"],
+        )
+        book.author = Author.objects.get(pk=self.kwargs["pk"])
+        book.save()
+        return super().form_valid(form)
