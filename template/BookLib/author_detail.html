@@ -6,11 +6,11 @@
     <title>{{author.first_name}} {{author.last_name}}</title>
 </head>
 <body>
-    <button type="button">Add Book</button>
+    <button type="button"><a href="">Add Book</a></button>
     <p>{{author.first_name}} {{author.last_name}}</p>
     {% for book in books %}
       <p>{{book}}</p>
     {% endfor %}
-    <button type="button">Delete Author</button>
+    <button type="button"><a href={% url "BookLib:delete_author" author.pk %}>Delete Author</a></button>
 </body>
 </html>
