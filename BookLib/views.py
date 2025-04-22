@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, FormView
+from django.views.generic import TemplateView, ListView, FormView, DetailView
 from .models import Author, Book
 from .forms import AuthorForm
 # Create your views here.
@@ -28,3 +28,12 @@ class AddAuthor(FormView):
         author.save()
         return super().form_valid(form)
     
+class AuthorDetail(DetailView):
+    model = Author
+    template_name = 'BookLib/author_detail.html'
+    context_object_name = 'author'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = Book.objects.filter(author=self.object)
+        return context

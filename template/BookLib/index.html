@@ -13,6 +13,7 @@
     <p>authors</p>
     {% for author in authors %}
       <p>{{author.first_name}} {{author.last_name}}</p>
+      <button type="button"><a href={% url "BookLib:author_detail" author.pk %}>Details</a></button>
     {% endfor %}
 </body>
 </html>
