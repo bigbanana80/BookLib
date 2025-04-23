@@ -107,3 +107,30 @@ class BookDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context["author"] = Author.objects.get(pk=self.object.author.pk)
         return context
+    
+class DeleteBook(DeleteView):
+    model = Book
+    template_name = "BookLib/Book/delete_book.html"
+    
+    def get_success_url(self):
+        return reverse_lazy("BookLib:author_detail", kwargs={"pk": self.object.author.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Delete Book"
+        context["book"] = self.object
+        return context
+    
+class UpdateBook(UpdateView):
+    model = Book
+    form_class = BookForm
+    template_name = "BookLib/Book/update_book.html"
+    
+    def get_success_url(self):
+        return reverse_lazy("BookLib:author_detail", kwargs={"pk": self.object.author.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Update Book"
+        context["book"] = self.object
+        return context

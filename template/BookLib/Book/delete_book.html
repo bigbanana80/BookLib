@@ -6,6 +6,14 @@
     <title>Update book</title>
 </head>
 <body>
-    <!-- TODO make this page: update book and its backend -->
+    <p>Are you sure you want to delete {{book.name}}?</p>
+    <p>deleting the book won't delete the author</p>
+    <form method="post" action="{% url 'BookLib:delete_book' book.pk %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <button type="button">
+            <a href={% url "BookLib:book_detail" book.pk %}>Cancel</a>
+        </button>
+    </form>
 </body>
 </html>

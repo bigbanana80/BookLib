@@ -6,6 +6,13 @@
     <title>Delete book</title>
 </head>
 <body>
-    <!-- TODO make this page: delete book and its backend -->
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">submit</button>
+        <button type="button">
+            <a href={% url "BookLib:book_detail" book.pk %}>Cancel</a>
+        </button>
+    </form>
 </body>
 </html>

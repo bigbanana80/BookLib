@@ -11,12 +11,15 @@
     <p>author: {{author.first_name}} {{author.last_name}}</p>
     
     <button type="button">
-        <a href="">Update Book</a>
+        <a href={% url "BookLib:update_book" book.pk %}>Update Book</a>
     </button>
     
     <button>
-        <a href="">Delete Book</a>
+        <a href={% url "BookLib:delete_book" book.pk %}>Delete Book</a>
     </button>
 
+    <button>
+        <a href={% url "BookLib:author_detail" book.author.pk %}>go back to author detail</a>
+    </button>
 </body>
 </html>
