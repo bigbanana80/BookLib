@@ -1,26 +1,33 @@
+{% extends "BookLib/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href={% static "css/BookLib/index.css" %}>
-    <title>Index</title>
-</head>
-<body>
-    
-    <a href={% url "BookLib:add_author" %}>Add author</a>
-    <form method="get" action="{% url 'BookLib:search_author' %}">
+
+{% block title %}
+  BookLib - Author list
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container-fluid d-flex  justify-content-center align-items-center flex-column">
+    <h1 class="display-4 text-center my-4">BookLib</h1>
+    <a class="btn btn-primary my-3" href={% url "BookLib:add_author" %}>Add author</a>
+    <form class="form mb-3" method="get" action="{% url 'BookLib:search_author' %}">
       <input type="text" name="q" placeholder="Search authors">
-      <button type="submit">Search</button>
+      <button class="btn btn-primary" type="submit">Search</button>
     </form>
-    <p>authors</p>
-    {% for author in authors %}
-      <p>{{author.first_name}} {{author.last_name}}</p>
-      <button type="button">
-        <a href={% url "BookLib:author_detail" author.pk %}>Details</a>
-      </button>
-    {% endfor %}
-</body>
-</html>
+    <h2 class="h2 my-3">Authors</h2>
+    <ul class="list-group">
+      {% for author in authors %}
+      <li class="list-group-item">
+        <div class="container mb-3">
+          <div class="row row-cols-auto justify-content-center">
+            <p class="col">{{author.first_name}} {{author.last_name}}</p>
+            <a class="col btn btn-secondary" href={% url "BookLib:author_detail" author.pk %}>Details</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

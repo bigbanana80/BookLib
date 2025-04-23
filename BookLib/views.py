@@ -26,7 +26,7 @@ class index(ListView):
 
 class AddAuthor(FormView):
     form_class = AuthorForm
-    template_name = "BookLib/add_author.html"
+    template_name = "BookLib/Author/add_author.html"
     success_url = reverse_lazy("BookLib:index")
 
     def form_valid(self, form):
@@ -43,7 +43,7 @@ class AddAuthor(FormView):
 
 class AuthorDetail(DetailView):
     model = Author
-    template_name = "BookLib/author_detail.html"
+    template_name = "BookLib/Author/author_detail.html"
     context_object_name = "author"
 
     def get_context_data(self, **kwargs):
@@ -61,7 +61,7 @@ class AuthorDetail(DetailView):
 
 class DeleteAuthor(DeleteView):
     model = Author
-    template_name = "BookLib/delete_author.html"
+    template_name = "BookLib/Author/delete_author.html"
     success_url = reverse_lazy("BookLib:index")
     
     def get_context_data(self, **kwargs):
@@ -73,7 +73,7 @@ class DeleteAuthor(DeleteView):
 class UpdateAuthor(UpdateView):
     model = Author
     form_class = AuthorForm
-    template_name = "BookLib/update_author.html"
+    template_name = "BookLib/Author/update_author.html"
     context_object_name = "author"
     
     def get_success_url(self):
@@ -86,7 +86,7 @@ class UpdateAuthor(UpdateView):
 
 class SearchAuthor(ListView):
     model = Author
-    template_name = "BookLib/search_author.html"
+    template_name = "BookLib/Author/search_author.html"
     context_object_name = "authors"
 
     def get_queryset(self):
