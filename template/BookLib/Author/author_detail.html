@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{author.first_name}} {{author.last_name}}</title>
-</head>
-<body>
-    <h1>Author Details</h1>
-    <form method="get" action={% url 'BookLib:author_detail' author.pk %}>
-        <input type="text" name="q" placeholder="Search books of this author">
-        <button type="submit">Search</button>
-    </form>
-    <button type="button">
-        <a href={% url "BookLib:add_book" author.pk %}>Add Book</a>
-    </button>
-    <button type="button">
-        <a href={% url "BookLib:update_author" author.pk %}>Update Author</a>
-    </button>
-    <p>{{author.first_name}} {{author.last_name}}</p>
-    {% for book in books %}
-        <p>{{book.name}}</p>
-        <button type="button">
-            <a href={% url "BookLib:book_detail" book.pk %}>Book Details</a>
-        </button>
-    {% endfor %}
-    <button type="button">
-        <a href={% url "BookLib:delete_author" author.pk %}>Delete Author</a>
-    </button>
+{% extends "BookLib/base.html" %}
+{% load static %}
 
-    <button>
-        <a href={% url "BookLib:index" %}>go back to author list</a>
-    </button>
-</body>
-</html>
+{% block title %}
+    {{author.first_name}} {{author.last_name}}
+{% endblock title %}
+
+{% block content %}
+    <h1 class="my-5">{{author.first_name}} {{author.last_name}}</h1>
+    <form
+        class="d-flex justify-content-center align-items-center flex-column my-5"
+        method="get" action={% url 'BookLib:author_detail' author.pk %}>
+            <input 
+                class="form-control mb-3" 
+                type="text" name="q" 
+                placeholder="Search books">
+            <button class="btn btn-primary mb-3" type="submit">Search</button>
+    </form>
+    
+    <a class="btn btn-primary mb-3" href={% url "BookLib:add_book" author.pk %}>Add Book</a>
+    <a class="btn btn-primary mb-3" href={% url "BookLib:update_author" author.pk %}>Update Author</a>
+    <a class="btn btn-primary mb-3" href={% url "BookLib:delete_author" author.pk %}>Delete Author</a>
+    <a class="btn btn-primary mb-3" href={% url "BookLib:index" %}>go back to author list</a>
+    
+    <h3 class="my-2">Books</h3>
+    <ul class="list-group">
+        {% for book in books %}
+            <li class="list-group-item">
+                <div class="row row-cols-auto justify-content-center">
+                    <p class="col my-2">{{book.name}}</p>
+                    <a class="col btn btn-primary" href={% url "BookLib:book_detail" book.pk %}>Book Details</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

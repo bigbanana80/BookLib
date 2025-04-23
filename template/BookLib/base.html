@@ -13,9 +13,11 @@
     <link rel="stylesheet" href={% static "bootstrap/dist/css/bootstrap.min.css" %}>
 </head>
 <body>
-    {% block content %}
-    
-    {% endblock content %}
+    <div class="container-fluid d-flex  justify-content-center align-items-center flex-column">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
     <script src={% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}></script>
 </body>
 </html>

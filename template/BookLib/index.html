@@ -7,8 +7,6 @@
 {% endblock title %}
 
 {% block content %}
-
-  <div class="container-fluid d-flex  justify-content-center align-items-center flex-column">
     <h1 class="display-4 text-center my-4">BookLib</h1>
     <a class="btn btn-primary my-3" href={% url "BookLib:add_author" %}>Add author</a>
     <form class="form mb-3" method="get" action="{% url 'BookLib:search_author' %}">
@@ -28,6 +26,4 @@
       </li>
       {% endfor %}
     </ul>
-  </div>
-
 {% endblock content %}

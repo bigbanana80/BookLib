@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search results</title>
-</head>
-<body>
-    {% for author in authors %}
-        <p>{{author.first_name}} {{author.last_name}}</p>
-        <button>
-            <a href={% url "BookLib:author_detail" author.pk %}>details</a>
-        </button>
-    {% endfor %}
-    <a href={% url "BookLib:index" %}>go back to homepage</a>
-</body>
-</html>
+{% extends "BookLib/base.html" %}
+{% load static %}
+
+{% block title %}
+    Search results
+{% endblock title %}
+
+
+{% block content %}
+    <h1 class="my-5">Search results</h1>
+    <ul class="list-group">
+        {% for author in authors %}
+        <li class="list-group-item">
+            <div class="row row-cols-aut0 justify-content-center">
+                <p class="col">{{author.first_name}} {{author.last_name}}</p>
+                <a class="col btn btn-secondary" href={% url "BookLib:author_detail" author.pk %}>details</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>      
+    <a class="btn btn-primary my-2" href={% url "BookLib:index" %}>go back to homepage</a>
+{% endblock content %}

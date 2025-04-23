@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post" action="{% url 'BookLib:add_author' %}">
+{% extends "BookLib/base.html" %}
+{% load static %}
+{% block title %}
+    Add new Author 
+{% endblock title %} 
+{% block content %}
+    <h1 class="my-3">Add new Author</h1>
+    <form
+        class="d-flex justify-content-center align-items-center flex-column my-5"
+        method="post"
+        action="{% url 'BookLib:add_author' %}"
+        >
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-</body>
-</html>
+{% endblock content %}

@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update {{author.first_name}} {{author.last_name}}</title>
-</head>
-<body>
-    <form method="post" action={% url "BookLib:update_author" author.pk %}>
+{% extends "BookLib/base.html" %}
+{% load static %}
+
+{% block title %}
+    Update {{author.first_name}} {{author.last_name}}
+{% endblock title %}
+{% block content %}
+    <h1 class="my-5">Update Author</h1>
+    <form
+        class="d-flex justify-content-center align-items-center flex-column my-5"
+        method="post" action={% url "BookLib:update_author" author.pk %}>
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Submit</button>
-        <button type="button">
-            <a href={% url "BookLib:author_detail" author.pk %}>Cancel</a>
-        </button>
+        <button class="btn btn-primary mb-3" type="submit">Submit</button>
+        <a class="btn btn-primary mb-3" href={% url "BookLib:author_detail" author.pk %}>Cancel</a>
     </form>
-</body>
-</html>
+{% endblock content %}
