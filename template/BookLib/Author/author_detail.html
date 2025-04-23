@@ -22,7 +22,11 @@
     <a class="btn btn-primary mb-3" href={% url "BookLib:delete_author" author.pk %}>Delete Author</a>
     <a class="btn btn-primary mb-3" href={% url "BookLib:index" %}>go back to author list</a>
     
+    {% if request.GET.q %}
+    <h3 class="my-2">Search results</h3>
+    {% else %}
     <h3 class="my-2">Books</h3>
+    {% endif %}
     <ul class="list-group">
         {% for book in books %}
             <li class="list-group-item">
