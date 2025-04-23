@@ -76,7 +76,29 @@ class UpdateAuthor(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Author"
         return context
-    
+
+class SearchAuthor(ListView):
+    model = Author
+    template_name = "BookLib/search_author.html"
+    context_object_name = "authors"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        if query:
+            return Author.objects.filter(
+                first_name__icontains=query
+            ) | Author.objects.filter(
+                last_name__icontains=query
+            )| Author.objects.filter(
+                national_code__icontains=query
+            )
+        return Author.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Search Author"
+        return context
+
 class AddBook(FormView):
     form_class = BookForm
     template_name = "BookLib/Book/add_book.html"
