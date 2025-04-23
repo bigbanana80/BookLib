@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>Author Details</h1>
-
+    <form method="get" action={% url 'BookLib:author_detail' author.pk %}>
+        <input type="text" name="q" placeholder="Search books of this author">
+        <button type="submit">Search</button>
+    </form>
     <button type="button">
         <a href={% url "BookLib:add_book" author.pk %}>Add Book</a>
     </button>

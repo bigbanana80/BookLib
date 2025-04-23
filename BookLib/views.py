@@ -48,7 +48,14 @@ class AuthorDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["books"] = Book.objects.filter(author=self.object)
+        query = self.request.GET.get("q")  
+        if query:
+            context["books"] = Book.objects.filter(
+                author=self.object, name__icontains=query
+            )
+        else:
+            context["books"] = Book.objects.filter(author=self.object)
+        context["title"] = f"Books by {self.object.first_name} {self.object.last_name}"
         return context
 
 
